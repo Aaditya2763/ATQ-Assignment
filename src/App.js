@@ -1,11 +1,13 @@
-import logo from './logo.svg';
+
 import './App.css';
+import NavbarBox from './components/Navbar/navbar';
+import Dashboard from './components/dashboard/dashboard';
 
 function App() {
   return (
-    <div className="App">
-      
-          Learn React
+    <div>
+     <NavbarBox/>
+     <Dashboard/>
        
     </div>
   );

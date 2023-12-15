@@ -14,7 +14,6 @@ import { FaFacebook } from "react-icons/fa";
 const NavbarBox = ({ login ,Authenticate}) => {
   const [show, setShow] = useState(false);
 const loginHandler=(e)=>{
-  e.preventDafult();
   Authenticate();
 }
 const [signinPage,setSigninPage]=useState(false)
@@ -105,9 +104,9 @@ placeholder='First Name'
 <input style={{width:"100%",height:46,marginLeft:-10,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500,paddingLeft:10}}placeholder='Email'/>
 <input style={{width:"100%",height:46,marginLeft:-10,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500,paddingLeft:10}} placeholder='Password'/>
 <input style={{width:"100%",height:46,marginLeft:-10,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500,paddingLeft:10}} placeholder='Confirm Password'/>
-<button className='container btn btn-primary rounded-pill' style={{marginLeft:-10,marginTop:10,height:40}} onClick={loginHandler}>Create Account</button>
-<button className='container btn ' style={{marginLeft:-10,marginTop:10,border:"1px solid lightgray"}}><FaFacebook style={{color:'#0000ff', width:20,height:20}}/><span style={{marginTop:10, marginLeft:10}}>Create Account</span></button>
-<button className='container btn' style={{marginLeft:-10,marginTop:10,border:"1px solid lightgray",marginBottom:20}}><FcGoogle />Create Account</button>
+<button className='container btn btn-primary rounded-pill' style={{marginLeft:-10,marginTop:10,height:40}} type="button" onClick={loginHandler}>Create Account</button>
+<button className='container btn ' style={{marginLeft:-10,marginTop:10,border:"1px solid lightgray"}} type="button" onClick={loginHandler}><FaFacebook style={{color:'#0000ff', width:20,height:20,}}/><span style={{marginTop:10, marginLeft:10 ,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500}}>Sign in with Facebook</span></button>
+<button className='container btn' style={{marginLeft:-10,marginTop:10,border:"1px solid lightgray",marginBottom:20,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500}}><FcGoogle style={{color:'#0000ff', width:20,height:20, marginRight:10}} type="button" onClick={loginHandler} />Sign in with Google</button>
 </Form>
     </Container >
             </div>
@@ -145,17 +144,15 @@ style={{height:320}}/>
             <div style={{width:"100%"}}>
 <h5 style={{fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '24px', fontWeight: 700}}>Sign In</h5>
 <Container className='container' >
-<Form>
-<input style={{width:"50%",height:46,marginLeft:-10,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500 ,paddingLeft:10}}
-placeholder='First Name'
-/>
-<input style={{width:"50%",height:46,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500,paddingLeft:10}} placeholder='Last Name'/><br/>
+<Form style={{marginTop:20}}>
 <input style={{width:"100%",height:46,marginLeft:-10,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500,paddingLeft:10}}placeholder='Email'/>
 <input style={{width:"100%",height:46,marginLeft:-10,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500,paddingLeft:10}} placeholder='Password'/>
-<input style={{width:"100%",height:46,marginLeft:-10,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500,paddingLeft:10}} placeholder='Confirm Password'/>
-<button className='container btn btn-primary rounded-pill' style={{marginLeft:-10,marginTop:10,height:40}} onClick={loginHandler}>Create Account</button>
-<button className='container btn ' style={{marginLeft:-10,marginTop:10,border:"1px solid lightgray"}}><FaFacebook style={{color:'#0000ff', width:20,height:20}}/><span style={{marginTop:10, marginLeft:10}}>Create Account</span></button>
-<button className='container btn' style={{marginLeft:-10,marginTop:10,border:"1px solid lightgray",marginBottom:20}}><FcGoogle />Create Account</button>
+<button className='container btn btn-primary rounded-pill' style={{marginLeft:-10,marginTop:10,height:50}} type="button" onClick={loginHandler}>Create Account</button>
+<button className='container btn ' style={{marginLeft:-10,marginTop:10,border:"1px solid lightgray"}} type="button" onClick={loginHandler}><FaFacebook style={{color:'#0000ff', width:20,height:20,}}/><span style={{marginTop:10, marginLeft:10 ,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500}}>Sign in with Facebook</span></button>
+<button className='container btn' style={{marginLeft:-10,marginTop:10,border:"1px solid lightgray",marginBottom:20,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500}}><FcGoogle style={{color:'#0000ff', width:20,height:20, marginRight:10}} type="button" onClick={loginHandler} />Sign in with Google</button>
+<button className='container btn' style={{marginLeft:-10,marginBottom:20,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500}}>Forget Password</button>
+
+
 </Form>
     </Container >
             </div>

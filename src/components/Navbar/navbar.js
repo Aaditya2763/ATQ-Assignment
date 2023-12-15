@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Container } from 'react-bootstrap';
+import { Navbar, Container,Row,Col } from 'react-bootstrap';
 import { IoMdArrowDropdown } from "react-icons/io";
 import { AiOutlineSearch } from "react-icons/ai";
 import classes from "./navbar.module.css";
@@ -8,10 +8,15 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import photo from "../../assets/user1.svg";
-
-const NavbarBox = ({ login }) => {
+import image  from "../../assets/authlogo.svg"
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebook } from "react-icons/fa";
+const NavbarBox = ({ login ,Authenticate}) => {
   const [show, setShow] = useState(false);
-
+const loginHandler=(e)=>{
+  e.preventDafult();
+  Authenticate();
+}
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -61,37 +66,51 @@ const NavbarBox = ({ login }) => {
         </div>
         
       </Container>
-      {!login  && <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+      {!login  && <Modal
+        show={show}
+        onHide={() => setShow(false)}
+        dialogClassName="modal-lg"
+        aria-labelledby="example-custom-modal-styling-title"
+        style={{marginTop:100, }}
+      >
+        <Modal.Header style={{backgroundColor:"#EFFFF4",textAlign:'center'}}  >
+          <Modal.Title id="example-custom-modal-styling-title" className='text-center fs-6 px-3 text-success' >
+            
+            Let's learn, share & inspire each other with our passion for computer engineering. Sign up now 🤘🏼
+       
+         
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="name@example.com"
-                autoFocus
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Example textarea</Form.Label>
-              <Form.Control as="textarea" rows={3} />
-            </Form.Group>
-          </Form>
+          <Container className='d-flex flex-row  justify-content-between '>
+            <div style={{width:"100%"}}>
+<h5 style={{fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '24px', fontWeight: 700}}> Create Account</h5>
+<Container className='container' >
+<Form>
+<input style={{width:"50%",height:46,marginLeft:-10,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500 ,paddingLeft:10}}
+placeholder='First Name'
+/>
+<input style={{width:"50%",height:46,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500,paddingLeft:10}} placeholder='Last Name'/><br/>
+<input style={{width:"100%",height:46,marginLeft:-10,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500,paddingLeft:10}}placeholder='Email'/>
+<input style={{width:"100%",height:46,marginLeft:-10,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500,paddingLeft:10}} placeholder='Password'/>
+<input style={{width:"100%",height:46,marginLeft:-10,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500,paddingLeft:10}} placeholder='Confirm Password'/>
+<button className='container btn btn-primary rounded-pill' style={{marginLeft:-10,marginTop:10,height:40}} onClick={loginHandler}>Create Account</button>
+<button className='container btn ' style={{marginLeft:-10,marginTop:10,border:"1px solid lightgray"}}><FaFacebook style={{color:'#0000ff', width:20,height:20}}/><span style={{marginTop:10, marginLeft:10}}>Create Account</span></button>
+<button className='container btn' style={{marginLeft:-10,marginTop:10,border:"1px solid lightgray",marginBottom:20}}><FcGoogle />Create Account</button>
+</Form>
+    </Container >
+            </div>
+            <div>
+<Container className='d-flex flex-column align-items-between'>
+      <p style={{textAlign:'right',fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '13px', fontWeight: 600}}>Already have an account?<span style={{color:'blue',cursor:"pointer"}}> Sign In</span></p>       
+<img src={image}
+style={{height:320}}/>
+<p style={{fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '11px', fontWeight: 400,marginTop:-10}}>By signing up, you agree to our Terms & conditions, Privacy policy</p>
+</Container>
+            </div>
+
+            </Container>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
       </Modal>}
     </Navbar>
   );

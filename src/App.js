@@ -16,10 +16,13 @@ function App() {
     setlogin(false);
     console.log(false);
   };
+  const AuthenticateHandler=()=>{
+    setlogin(true)
+  }
 
   return (
     <div style={{overflow:'hidden'}}>
-      <NavbarBox showAuthHandler={showAuthHandler} hideAuthHandler={hideAuthHandler}  login={login}/>
+      <NavbarBox showAuthHandler={showAuthHandler} hideAuthHandler={hideAuthHandler}  login={login} Authenticate={AuthenticateHandler}/>
       
       <Dashboard login={login}/>
     </div>

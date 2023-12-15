@@ -1,0 +1,51 @@
+{
+    "posts":[
+        {
+            "id": 123,
+            "username": "Sarthak Kamra",
+            "img": "",
+            "lastName": "John",
+            "userImg":"",
+            "icon": "Doe",
+            "title": "What if famous brands had regular fonts? Meet RegulaBrands!",
+            "text":"I’ve worked in UX for the better part of a decade. From now on, I plan to rei…",
+            "location":"",
+            "category":"Article",
+            "views":"1.4k views",
+            "jobPoster":""
+            
+          },
+           {
+            "id": 123,
+            "username": "Sarthak Kamra",
+            "img": "",
+            "lastName": "John",
+            "userImg":"",
+            "icon": "Doe",
+            "title": " Finance & Investment Elite Social Mixer @Lujiazui",
+            "text":"I’ve worked in UX for the better part of a decade. From now on, I plan to rei…",
+            "location":"Ahmedabad, India",
+            "category":"Meetup",
+            "views":"1.4k views",
+            "jobPoster":""
+            
+          },
+          {
+            "id": 123,
+            "username": "Sarthak Kamra",
+            "img": "",
+            "lastName": "John",
+            "userImg":"",
+            "icon": "Doe",
+            "title": "Software Developer",
+            "text":"I’ve worked in UX for the better part of a decade. From now on, I plan to rei…",
+            "location":"Ahmedabad, India",
+            "category":"Job",
+            "views":"1.4k views",
+            "jobPoster":"Innovaccer Analytics Private Ltd."
+            
+          }
+          
+        ]
+  }
+  

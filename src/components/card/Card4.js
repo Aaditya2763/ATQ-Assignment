@@ -14,7 +14,7 @@ import { Container ,Button} from 'react-bootstrap';
 
 const CardBox4 = () => {
   return (
-    <Row  style={{width:"60%",marginTop:15}}>
+    <Row  style={{width:"60%",marginTop:15 ,marginBottom:15}}>
       
         <Col >
           <Card>

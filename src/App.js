@@ -5,7 +5,7 @@ import Dashboard from './components/dashboard/dashboard';
 import Signup from './components/auth/Signup';
 
 function App() {
-  const [login, setlogin] = useState(true);
+  const [login, setlogin] = useState(false);
 
   const showAuthHandler = () => {
     login(true);

@@ -17,14 +17,18 @@ const loginHandler=(e)=>{
   Authenticate();
 }
 const [signinPage,setSigninPage]=useState(false)
-
+const[signupPage,setSignupPage]=useState(true);
 const showsignInHabandler=()=>{
  
 setSigninPage(true)
-
+setSignupPage(false)
+handleClose();
+handleShow();
 }
 const hideSigninPage = () => {
+  setSignupPage(true)
     setSigninPage(false);
+  
  
   };
   const handleClose = () => setShow(false);
@@ -76,7 +80,7 @@ const hideSigninPage = () => {
         </div>
         
       </Container>
-      {!login && handleShow  && <Modal
+      {!login && handleShow && signupPage  && <Modal
         show={show}
         onHide={() => setShow(false)}
         dialogClassName="modal-lg"

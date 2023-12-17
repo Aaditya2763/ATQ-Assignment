@@ -574,9 +574,6 @@ const NavbarBox = () => {
                     >
                       change Password
                     </button>
-                    {/* <button className='container btn ' style={{marginLeft:-10,marginTop:10,border:"1px solid lightgray"}} type="button" onClick={() => dispatch(login())}><FaFacebook style={{color:'#0000ff', width:20,height:20,}}/><span style={{marginTop:10, marginLeft:10 ,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500}}>Sign in with Facebook</span></button> */}
-                    {/* <button className='container btn' style={{marginLeft:-10,marginTop:10,border:"1px solid lightgray",marginBottom:20,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500}}><FcGoogle style={{color:'#0000ff', width:20,height:20, marginRight:10}} type="button" onClick={() => dispatch(login())} />Sign in with Google</button> */}
-                    {/* <button className='container btn' style={{marginLeft:-10,marginBottom:20,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500}}>Forget Password</button> */}
                   </Form>
                 </Container>
               </div>

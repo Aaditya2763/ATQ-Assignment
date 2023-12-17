@@ -14,7 +14,7 @@ import FlashMessage from 'react-flash-message';
 const DashboardBox = () => {
   const [show, setShow] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
- const[edit,setEdit]=useState(false)
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const loggedIn = useSelector((state) => state.auth.loggedIn);
@@ -33,21 +33,18 @@ const DashboardBox = () => {
       reader.readAsDataURL(file);
     }
   };
-  const edithandler=()=>{
-    setEdit(true)
-  }
- 
-  console.log(edit)
+
+
   return (
     <div style={{overflow:"hidden"}}>
-      {!loggedIn && edit && (<FlashMessage duration={5000}>
+     
+     <Modal show={show} onHide={handleClose} size="lg">
+        <Modal.Header closeButton>
+          {loggedIn ?<Modal.Title >✍️Create Post with ❤️</Modal.Title>:<FlashMessage duration={500000}>
             <div className="alert alert-danger" role="alert" style={{textAlign:"center"}}>
               You need to login first
             </div>
-          </FlashMessage>)}
-      {loggedIn && (<Modal show={show} onHide={handleClose} size="lg">
-        <Modal.Header closeButton>
-          <Modal.Title >✍️Create Post with ❤️</Modal.Title>
+          </FlashMessage>}
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -59,7 +56,7 @@ const DashboardBox = () => {
                   fontStyle: "normal",
                   fontWeight: 500,
                 }}
-              >
+              >edit
                 {" "}
                 Post Title
               </Form.Label>
@@ -123,24 +120,17 @@ const DashboardBox = () => {
                 }}>
             cancel
           </Button>
-          <Button variant="primary" onClick={handleClose}  style={{
+         {loggedIn &&( <Button variant="primary" onClick={handleClose}  style={{
                   fontFamily: "IBM Plex Sans",
                   fontSize: "18px",
                   fontStyle: "normal",
                   fontWeight: 500,
                 }}>
             Post
-          </Button>
+          </Button>)}
         </Modal.Footer>
-      </Modal>)}
-      {loggedIn && (
-          <FlashMessage duration={5000}>
-            <div className="alert alert-success" role="alert" style={{textAlign:"center"}}>
-              Login successful!
-            </div>
-          </FlashMessage>
-          
-        )}
+      </Modal>
+    
       {!loggedIn && (
         <div className="d-flex flex-column">
           <img
@@ -244,9 +234,10 @@ const DashboardBox = () => {
       </Container>
       <Container className=" d-flex flex-row align-items-center mt-3  mb-3  ">
         <CardBox descStyle={{fontFamily: 'IBM Plex Sans', fontSize: '19px', fontStyle: 'normal', fontWeight: 400,color:"#5C5C5C", width:"500px", height:"60px", overflow:'hidden'}}
-        headingStyle={{fontFamily: 'IBM Plex Sans', fontSize: '22px', fontStyle: 'normal', fontWeight: 600,lineHeight:"30px",width:"500px", height:"35px", overflow:'hidden'}} />
-        <CardBox descStyle={{fontFamily: 'IBM Plex Sans', fontSize: '19px', fontStyle: 'normal', fontWeight: 400,color:"#5C5C5C", width:"500px", height:"60px", overflow:'hidden'}}
-        headingStyle={{fontFamily: 'IBM Plex Sans', fontSize: '22px', fontStyle: 'normal', fontWeight: 600,lineHeight:"30px",width:"500px", height:"35px", overflow:'hidden'}} />
+        headingStyle={{fontFamily: 'IBM Plex Sans', fontSize: '22px', fontStyle: 'normal', fontWeight: 600,lineHeight:"30px",width:"500px", height:"35px", overflow:'hidden'}}  />
+  <CardBox descStyle={{fontFamily: 'IBM Plex Sans', fontSize: '19px', fontStyle: 'normal', fontWeight: 400,color:"#5C5C5C", width:"500px", height:"60px", overflow:'hidden'}}
+        headingStyle={{fontFamily: 'IBM Plex Sans', fontSize: '22px', fontStyle: 'normal', fontWeight: 600,lineHeight:"30px",width:"500px", height:"35px", overflow:'hidden'}}  />
+  
       </Container>
     </div>
   );

@@ -1,6 +1,5 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import classes from "./dashboard.module.css";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { MdGroupAdd } from "react-icons/md";
 import CardBox from "../card/Card";
@@ -8,13 +7,17 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-
-const DashboardBox = ({ login }) => {
+import classes from "./dashboard.module.css"
+import { useSelector } from "react-redux";
+import { FaHeart } from "react-icons/fa";
+import FlashMessage from 'react-flash-message';
+const DashboardBox = () => {
   const [show, setShow] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-
+ const[edit,setEdit]=useState(false)
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const loggedIn = useSelector((state) => state.auth.loggedIn);
  
 
   const imageChangeHandler = (event) => {
@@ -30,10 +33,19 @@ const DashboardBox = ({ login }) => {
       reader.readAsDataURL(file);
     }
   };
-
+  const edithandler=()=>{
+    setEdit(true)
+  }
+ 
+  console.log(edit)
   return (
-    <div>
-      <Modal show={show} onHide={handleClose} size="lg">
+    <div style={{overflow:"hidden"}}>
+      {!loggedIn && edit && (<FlashMessage duration={5000}>
+            <div className="alert alert-danger" role="alert" style={{textAlign:"center"}}>
+              You need to login first
+            </div>
+          </FlashMessage>)}
+      {loggedIn && (<Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
           <Modal.Title >✍️Create Post with ❤️</Modal.Title>
         </Modal.Header>
@@ -120,8 +132,16 @@ const DashboardBox = ({ login }) => {
             Post
           </Button>
         </Modal.Footer>
-      </Modal>
-      {!login && (
+      </Modal>)}
+      {loggedIn && (
+          <FlashMessage duration={5000}>
+            <div className="alert alert-success" role="alert" style={{textAlign:"center"}}>
+              Login successful!
+            </div>
+          </FlashMessage>
+          
+        )}
+      {!loggedIn && (
         <div className="d-flex flex-column">
           <img
             src="/assets/dashboardImg.svg"
@@ -156,7 +176,7 @@ const DashboardBox = ({ login }) => {
         </div>
       )}
 
-      <Container>
+      <Container >
         <div
           className="d-flex flex-row justify-content-between  border-bottom  mt-5 align-items-center"
           style={{ height: 40, minWidth: "100%" }}
@@ -190,22 +210,21 @@ const DashboardBox = ({ login }) => {
 
           <ul className="d-flex flex-row p-1">
             <button
-              className="btn btn-secondary mx-2 text-dark"
+              className="btn btn-warning mx-2 text-dark"
               style={{
-                backgroundColor: "#EDEEF0",
+               
                 fontFamily: "IBM Plex Sans",
                 fontSize: "15px",
                 fontStyle: "normal",
                 fontWeight: 400,
-                border: "none",
-                borderRadius: 4,
+               
               }}
               onClick={handleShow}
             >
               Write a Post <IoMdArrowDropdown className="text-dark" />{" "}
             </button>
             <button
-              className="btn btn-primary mx-2 text-light"
+              className="btn btn-primary mx-2 text-dark "
               style={{
                 fontFamily: "IBM Plex Sans",
                 fontSize: "15px",
@@ -213,17 +232,21 @@ const DashboardBox = ({ login }) => {
                 fontWeight: 400,
                 border: "none",
                 borderRadius: 4,
+                background:"#EDEEF0",
+               
               }}
             >
-              <MdGroupAdd className="m-1" />
-              Join Group{" "}
+              <FaHeart className="m-1 text-danger " />
+              Liked
             </button>
           </ul>
         </div>
       </Container>
       <Container className=" d-flex flex-row align-items-center mt-3  mb-3  ">
-        <CardBox />
-        <CardBox />
+        <CardBox descStyle={{fontFamily: 'IBM Plex Sans', fontSize: '19px', fontStyle: 'normal', fontWeight: 400,color:"#5C5C5C", width:"500px", height:"60px", overflow:'hidden'}}
+        headingStyle={{fontFamily: 'IBM Plex Sans', fontSize: '22px', fontStyle: 'normal', fontWeight: 600,lineHeight:"30px",width:"500px", height:"35px", overflow:'hidden'}} />
+        <CardBox descStyle={{fontFamily: 'IBM Plex Sans', fontSize: '19px', fontStyle: 'normal', fontWeight: 400,color:"#5C5C5C", width:"500px", height:"60px", overflow:'hidden'}}
+        headingStyle={{fontFamily: 'IBM Plex Sans', fontSize: '22px', fontStyle: 'normal', fontWeight: 600,lineHeight:"30px",width:"500px", height:"35px", overflow:'hidden'}} />
       </Container>
     </div>
   );

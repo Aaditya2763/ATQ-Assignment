@@ -5,6 +5,9 @@ import './App.css';
 import NavbarBox from './components/Navbar/navbar';
 import DashBoard from './pages/dashboard';
 import PostBox from './pages/Post';
+import { Provider } from 'react-redux';
+import store from './redux/store/Store';
+
 
 function App() {
   const [login, setLogin] = useState(false);
@@ -24,8 +27,10 @@ function App() {
   };
 
   return (
+    <Provider store={store}>
     <BrowserRouter>
-      <div style={{ overflow: 'hidden' }}>
+    
+      <div style={{overflow:'hidden'}}>
         <NavbarBox showAuthHandler={showAuthHandler} hideAuthHandler={hideAuthHandler} login={login} Authenticate={AuthenticateHandler} />
 
         <Routes>
@@ -35,6 +40,7 @@ function App() {
         </Routes>
       </div>
     </BrowserRouter>
+    </Provider>
   );
 }
 

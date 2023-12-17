@@ -3,9 +3,21 @@
     height:200px;
 }
 
+
 .imageBox{
     display: flex;
     flex-direction: row;
+}
+.likeIcon{
+   
+    font-size: 1.5rem;
+   color: rgb(208, 207, 207);
+  
+}
+.likeIcon:hover{
+    color: red;
+    font-size: 2rem;
+    cursor: pointer; 
 }
 
 @media screen and (max-width:1000px) {

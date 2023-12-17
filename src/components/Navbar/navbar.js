@@ -2,20 +2,20 @@ import React from "react";
 import { Navbar, Container } from "react-bootstrap";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { AiOutlineSearch } from "react-icons/ai";
-
+import Dropdown from 'react-bootstrap/Dropdown';
 import { useState } from "react";
 
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import photo from "../../assets/user1.svg";
+import { FaRegUser } from "react-icons/fa";
 import image from "../../assets/authlogo.svg";
 import { FcGoogle } from "react-icons/fc";
+import { useDispatch, useSelector } from 'react-redux';
+import { login, logout } from '../../redux/slices/authSlice';
 import { FaFacebook } from "react-icons/fa";
-const NavbarBox = ({ login, Authenticate }) => {
+const NavbarBox = () => {
   const [show, setShow] = useState(false);
-  const loginHandler = (e) => {
-    Authenticate();
-  };
+ 
   const [signinPage, setSigninPage] = useState(false);
   const [signupPage, setSignupPage] = useState(true);
   const [forget, setForget] = useState(false);
@@ -23,8 +23,7 @@ const NavbarBox = ({ login, Authenticate }) => {
     setSigninPage(true);
     setSignupPage(false);
     setForget(false);
-    handleClose();
-    handleShow();
+   
   };
   const hideSigninPage = () => {
     setSignupPage(true);
@@ -38,6 +37,10 @@ const NavbarBox = ({ login, Authenticate }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+  const loggedIn = useSelector((state) => state.auth.loggedIn);
+ 
+  const dispatch = useDispatch();
   return (
     <Navbar>
       <Container>
@@ -78,24 +81,22 @@ const NavbarBox = ({ login, Authenticate }) => {
         </div>
 
         <div onClick={handleShow}>
-          {login && (
+          {loggedIn && (
             <div className="d-flex flex-row align-items-center">
-              <img alt="img" src={photo} />
-              <p
-                style={{
-                  fontFamily: "IBM Plex Sans",
-                  fontSize: "16px",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  cursor: "pointer",
-                  marginTop: 15,
-                }}
-              >
-                Sarthak Kamra
-              </p>
+               <Dropdown>
+      <Dropdown.Toggle  id="dropdown-basic" style={{background:"white",border:"none",color:"black"}}>
+      <FaRegUser style={{width:"25px",height:"25px",marginRight:5}}/>
+      Hello, user
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item onClick={() => dispatch(logout())} >Logout</Dropdown.Item>
+        
+      </Dropdown.Menu>
+    </Dropdown>
             </div>
           )}
-          {!login && (
+          {!loggedIn && (
             <p
               className="text-dark mt-3"
               style={{
@@ -126,7 +127,7 @@ const NavbarBox = ({ login, Authenticate }) => {
           )}
         </div>
       </Container>
-      {!login && handleShow && signupPage && (
+      {!loggedIn && handleShow && signupPage && (
         <Modal
           show={show}
           onHide={() => setShow(false)}
@@ -230,7 +231,7 @@ const NavbarBox = ({ login, Authenticate }) => {
                       className="container btn btn-primary rounded-pill"
                       style={{ marginLeft: -10, marginTop: 10, height: 40 }}
                       type="button"
-                      onClick={loginHandler}
+                      onClick={() => dispatch(login())}
                     >
                       Create Account
                     </button>
@@ -242,7 +243,7 @@ const NavbarBox = ({ login, Authenticate }) => {
                         border: "1px solid lightgray",
                       }}
                       type="button"
-                      onClick={loginHandler}
+                      onClick={() => dispatch(login())}
                     >
                       <FaFacebook
                         style={{ color: "#0000ff", width: 20, height: 20 }}
@@ -281,7 +282,7 @@ const NavbarBox = ({ login, Authenticate }) => {
                           marginRight: 10,
                         }}
                         type="button"
-                        onClick={loginHandler}
+                        onClick={() => dispatch(login())}
                       />
                       Sign in with Google
                     </button>
@@ -328,7 +329,7 @@ const NavbarBox = ({ login, Authenticate }) => {
         </Modal>
       )}
 
-      {!login && signinPage && (
+      {!loggedIn && signinPage && (
         <Modal
           show={show}
           onHide={() => setShow(false)}
@@ -392,7 +393,7 @@ const NavbarBox = ({ login, Authenticate }) => {
                       className="container btn btn-primary rounded-pill"
                       style={{ marginLeft: -10, marginTop: 10, height: 50 }}
                       type="button"
-                      onClick={loginHandler}
+                      onClick={() => dispatch(login())}
                     >
                       Sign in
                     </button>
@@ -404,7 +405,7 @@ const NavbarBox = ({ login, Authenticate }) => {
                         border: "1px solid lightgray",
                       }}
                       type="button"
-                      onClick={loginHandler}
+                      onClick={() => dispatch(login())}
                     >
                       <FaFacebook
                         style={{ color: "#0000ff", width: 20, height: 20 }}
@@ -443,7 +444,7 @@ const NavbarBox = ({ login, Authenticate }) => {
                           marginRight: 10,
                         }}
                         type="button"
-                        onClick={loginHandler}
+                        onClick={() => dispatch(login())}
                       />
                       Sign in with Google
                     </button>
@@ -505,7 +506,7 @@ const NavbarBox = ({ login, Authenticate }) => {
         </Modal>
       )}
 
-      {!login && forget && (
+      {!loggedIn && forget && (
         <Modal
           show={show}
           onHide={() => setShow(false)}
@@ -569,12 +570,12 @@ const NavbarBox = ({ login, Authenticate }) => {
                       className="container btn btn-primary rounded-pill"
                       style={{ marginLeft: -10, marginTop: 20, height: 50 }}
                       type="button"
-                      onClick={loginHandler}
+                      onClick={() => dispatch(login())}
                     >
                       change Password
                     </button>
-                    {/* <button className='container btn ' style={{marginLeft:-10,marginTop:10,border:"1px solid lightgray"}} type="button" onClick={loginHandler}><FaFacebook style={{color:'#0000ff', width:20,height:20,}}/><span style={{marginTop:10, marginLeft:10 ,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500}}>Sign in with Facebook</span></button> */}
-                    {/* <button className='container btn' style={{marginLeft:-10,marginTop:10,border:"1px solid lightgray",marginBottom:20,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500}}><FcGoogle style={{color:'#0000ff', width:20,height:20, marginRight:10}} type="button" onClick={loginHandler} />Sign in with Google</button> */}
+                    {/* <button className='container btn ' style={{marginLeft:-10,marginTop:10,border:"1px solid lightgray"}} type="button" onClick={() => dispatch(login())}><FaFacebook style={{color:'#0000ff', width:20,height:20,}}/><span style={{marginTop:10, marginLeft:10 ,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500}}>Sign in with Facebook</span></button> */}
+                    {/* <button className='container btn' style={{marginLeft:-10,marginTop:10,border:"1px solid lightgray",marginBottom:20,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500}}><FcGoogle style={{color:'#0000ff', width:20,height:20, marginRight:10}} type="button" onClick={() => dispatch(login())} />Sign in with Google</button> */}
                     {/* <button className='container btn' style={{marginLeft:-10,marginBottom:20,fontFamily: 'IBM Plex Sans', fontStyle: 'normal', fontSize: '15px', fontWeight: 500}}>Forget Password</button> */}
                   </Form>
                 </Container>

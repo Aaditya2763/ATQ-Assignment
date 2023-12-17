@@ -1,31 +1,40 @@
+// App.js
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import NavbarBox from './components/Navbar/navbar';
-import Dashboard from './components/dashboard/dashboard';
-import Signup from './components/auth/Signup';
+import DashBoard from './pages/dashboard';
+import PostBox from './pages/Post';
 
 function App() {
-  const [login, setlogin] = useState(false);
+  const [login, setLogin] = useState(false);
 
   const showAuthHandler = () => {
-    login(true);
+    setLogin(true);
     console.log(true);
   };
 
   const hideAuthHandler = () => {
-    setlogin(false);
+    setLogin(false);
     console.log(false);
   };
-  const AuthenticateHandler=()=>{
-    setlogin(true)
-  }
+
+  const AuthenticateHandler = () => {
+    setLogin(true);
+  };
 
   return (
-    <div style={{overflow:'hidden'}}>
-      <NavbarBox showAuthHandler={showAuthHandler} hideAuthHandler={hideAuthHandler}  login={login} Authenticate={AuthenticateHandler}/>
-      
-      <Dashboard login={login}/>
-    </div>
+    <BrowserRouter>
+      <div style={{ overflow: 'hidden' }}>
+        <NavbarBox showAuthHandler={showAuthHandler} hideAuthHandler={hideAuthHandler} login={login} Authenticate={AuthenticateHandler} />
+
+        <Routes>
+          <Route path="/" element={<DashBoard />} />
+          <Route path="/:id" element={<PostBox />} />
+          
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

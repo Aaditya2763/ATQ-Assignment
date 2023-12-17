@@ -1,0 +1,23 @@
+
+.heading{
+    text-align: center;
+    color: "black";
+    font-family: "IBM Plex Sans";
+    font-size: "18px";
+ align-items: center;
+    font-style: "normal";
+    font-weight: 600;
+}
+.comment{
+    overflow-wrap: break-word;
+    margin-top: -15px;
+    font-family: "IBM Plex Sans";
+}
+.author{
+    color: "black";
+    font-family: "IBM Plex Sans";
+    font-size: "18px";
+ align-items: center;
+    font-style: "normal";
+    font-weight: 600;
+}

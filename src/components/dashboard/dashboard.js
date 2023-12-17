@@ -2,23 +2,132 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import classes from "./dashboard.module.css";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { CiLocationOn } from "react-icons/ci";
 import { MdGroupAdd } from "react-icons/md";
-import { IoEyeOutline } from "react-icons/io5";
-import { IoShareSocial } from "react-icons/io5";
-import { HiPencil } from "react-icons/hi";
-import { HiOutlineExclamationCircle } from "react-icons/hi2";
 import CardBox from "../card/Card";
-import CardBox2 from "../card/Card2";
-import CardBox3 from "../card/Card3";
-import CardBox4 from "../card/Card4";
-import { RiThumbUpLine } from "react-icons/ri";
-const Dashboard = ({ login }) => {
+import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
+
+const DashboardBox = ({ login }) => {
+  const [show, setShow] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+ 
+
+  const imageChangeHandler = (event) => {
+    const file = event.target.files[0];
+   
+    // Check if a file is selected
+    if (file) {
+      // Convert the selected file to a data URL
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
-    <div className={classes.box}>
+    <div>
+      <Modal show={show} onHide={handleClose} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title >✍️Create Post with ❤️</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label
+                style={{
+                  fontFamily: "IBM Plex Sans",
+                  fontSize: "18px",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                }}
+              >
+                {" "}
+                Post Title
+              </Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Title of the post"
+                autoFocus
+                style={{
+                    fontFamily: "IBM Plex Sans",
+                    fontSize: "18px",
+                    fontStyle: "normal",
+                    fontWeight: 500,height:'auto'
+                  }}
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
+              <Form.Label  style={{
+                  fontFamily: "IBM Plex Sans",
+                  fontSize: "18px",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                }}>Post Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows="auto"
+                style={{
+                    fontFamily: "IBM Plex Sans",
+                    fontSize: "18px",
+                    fontStyle: "normal",
+                    fontWeight: 500,
+                  }}
+                placeholder="Write the description of the post"
+              />
+            </Form.Group>
+            
+        <div className="d-flex flex-row justify-content-between">
+              <input className="form-control"
+            type="file"
+            accept=".jpg, .jpeg, .png"
+            onChange={(e) => imageChangeHandler(e)}
+            style={{width:"200px",height:"50px"}}
+    placeholder="Choose file"/>
+    {selectedImage && (
+         <div className="d-flex flex-row"> <p>Selected Image:</p>
+         <img src={selectedImage} alt="Selected" style={{ maxWidth: '100%',height:"200px" ,margin:"5px" }} /></div>
+          )}
+        </div>
+     
+          
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}  style={{
+                  fontFamily: "IBM Plex Sans",
+                  fontSize: "18px",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                }}>
+            cancel
+          </Button>
+          <Button variant="primary" onClick={handleClose}  style={{
+                  fontFamily: "IBM Plex Sans",
+                  fontSize: "18px",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                }}>
+            Post
+          </Button>
+        </Modal.Footer>
+      </Modal>
       {!login && (
         <div className="d-flex flex-column">
-          <img src="/assets/dashboardImg.svg" className={classes.image} />
+          <img
+            src="/assets/dashboardImg.svg"
+            className={classes.image}
+            alt="img"
+          />
           <div style={{ position: "absolute", top: "40%", left: "10%" }}>
             <h3
               style={{
@@ -77,66 +186,6 @@ const Dashboard = ({ login }) => {
             >
               All posts(32)
             </li>
-            <li
-              className="me-2"
-              style={{
-                fontFamily: "IBM Plex Sans",
-                fontSize: "16px",
-                fontStyle: "normal",
-                fontWeight: 400,
-                color: " #8A8A8A",
-                paddingTop: 10,
-                paddingBottom: 20,
-                paddingLeft: 10,
-              }}
-            >
-              Article
-            </li>
-            <li
-              className="me-2"
-              style={{
-                fontFamily: "IBM Plex Sans",
-                fontSize: "16px",
-                fontStyle: "normal",
-                fontWeight: 400,
-                color: " #8A8A8A",
-                paddingTop: 10,
-                paddingBottom: 20,
-                paddingLeft: 10,
-              }}
-            >
-              Event
-            </li>
-            <li
-              className="me-2"
-              style={{
-                fontFamily: "IBM Plex Sans",
-                fontSize: "16px",
-                fontStyle: "normal",
-                fontWeight: 400,
-                color: " #8A8A8A",
-                paddingTop: 10,
-                paddingBottom: 20,
-                paddingLeft: 10,
-              }}
-            >
-              Education
-            </li>
-            <li
-              className="me-2"
-              style={{
-                fontFamily: "IBM Plex Sans",
-                fontSize: "16px",
-                fontStyle: "normal",
-                fontWeight: 400,
-                color: " #8A8A8A",
-                paddingTop: 10,
-                paddingBottom: 20,
-                paddingLeft: 10,
-              }}
-            >
-              Jobs
-            </li>
           </ul>
 
           <ul className="d-flex flex-row p-1">
@@ -151,6 +200,7 @@ const Dashboard = ({ login }) => {
                 border: "none",
                 borderRadius: 4,
               }}
+              onClick={handleShow}
             >
               Write a Post <IoMdArrowDropdown className="text-dark" />{" "}
             </button>
@@ -171,249 +221,12 @@ const Dashboard = ({ login }) => {
           </ul>
         </div>
       </Container>
-      <Container className="d-flex flex-row justify-content-between mt-3  mb-3 align-items-center">
+      <Container className=" d-flex flex-row align-items-center mt-3  mb-3  ">
         <CardBox />
-        <div className="d-flex flex-column justify-content-center position-relative ">
-          <div>
-            <CiLocationOn
-              style={{ position: "absolute", left: 0, top: 7, marginTop: 20 }}
-            />
-            <input
-              placeholder="Enter the location"
-              className="form-control      "
-              style={{
-                width: "100%",
-                height: 30,
-
-                marginTop: 20,
-                border: "none",
-                borderRadius: 0,
-                paddingLeft: 20,
-                borderColor: "lightgray",
-                borderBottom: "1px solid gray",
-              }}
-            />
-            <HiPencil
-              style={{ position: "absolute", right: 10, top: 7, marginTop: 20 }}
-            />
-          </div>
-          <div
-            className="d-flex flex-row justify-content-between "
-            style={{ position: "absolute", width: "200px", marginTop: -190 }}
-          >
-            <p>
-              <HiOutlineExclamationCircle />
-            </p>
-            <p
-              style={{
-                fontFamily: "IBM Plex Sans",
-                fontSize: "12px",
-                color: "gray",
-                fontStyle: "normal",
-                fontWeight: 400,
-                border: "none",
-                marginTop: 5,
-              }}
-            >
-              Your location will help us serve better and extend a personalised
-              experience.
-            </p>
-          </div>
-          <div
-            style={{
-              width: "100%",
-              height: "auto",
-              position: "relative",
-              marginTop: 100,
-            }}
-          >
-            <RiThumbUpLine />
-            <span
-              style={{
-                marginTop: 5,
-                marginLeft: 5,
-                fontFamily: "IBM Plex Sans",
-                fontSize: "14px",
-                fontWeight: "400",
-              }}
-            >
-              RECOMENDED GROUPS
-            </span>
-          </div>
-
-          <div className="d-flex flex-row justify-content-between align-items-center ">
-            <div className="d-flex flex-row  align-items-center ">
-              <img
-                src="../../assets/groups/grp1.svg"
-                style={{
-                  width: "36px",
-                  height: "36px",
-                }}
-              />
-              <p
-                style={{
-                  fontFamily: "IBM Plex Sans",
-                  fontSize: "14px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  color: "black",
-                  marginTop: 15,
-                  paddingLeft: 5,
-                }}
-              >
-                Leisure
-              </p>
-            </div>
-            <p
-              style={{
-                width: "100",
-                marginTop: 15,
-                color: "#525252",
-                fontFamily: "IBM Plex Sans",
-                fontSize: "14px",
-                fontStyle: "normal",
-                fontWeight: 500,
-                backgroundColor: "lightgray",
-                paddingLeft: 5,
-                paddingRight: 5,
-                borderRadius: 5,
-              }}
-            >
-              Follow{" "}
-            </p>
-          </div>
-          <div className="d-flex flex-row justify-content-between align-items-center ">
-            <div className="d-flex flex-row  align-items-center ">
-              <img
-                src="../../assets/groups/grp1.svg"
-                style={{
-                  width: "36px",
-                  height: "36px",
-                }}
-              />
-              <p
-                style={{
-                  fontFamily: "IBM Plex Sans",
-                  fontSize: "14px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  color: "black",
-                  marginTop: 15,
-                  paddingLeft: 5,
-                }}
-              >
-                Activism
-              </p>
-            </div>
-            <p
-              style={{
-                width: "100",
-                marginTop: 15,
-                color: "#525252",
-                fontFamily: "IBM Plex Sans",
-                fontSize: "14px",
-                fontStyle: "normal",
-                fontWeight: 500,
-                backgroundColor: "lightgray",
-                paddingLeft: 5,
-                paddingRight: 5,
-                borderRadius: 5,
-              }}
-            >
-              Follow{" "}
-            </p>
-          </div>
-          <div className="d-flex flex-row justify-content-between align-items-center ">
-            <div className="d-flex flex-row  align-items-center ">
-              <img
-                src="../../assets/groups/grp3.svg"
-                style={{
-                  width: "36px",
-                  height: "36px",
-                }}
-              />
-              <p
-                style={{
-                  fontFamily: "IBM Plex Sans",
-                  fontSize: "14px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  color: "black",
-                  marginTop: 15,
-                  paddingLeft: 5,
-                }}
-              >
-                MBA
-              </p>
-            </div>
-            <p
-              style={{
-                width: "100",
-                marginTop: 15,
-                color: "#525252",
-                fontFamily: "IBM Plex Sans",
-                fontSize: "14px",
-                fontStyle: "normal",
-                fontWeight: 500,
-                backgroundColor: "lightgray",
-                paddingLeft: 5,
-                paddingRight: 5,
-                borderRadius: 5,
-              }}
-            >
-              Follow{" "}
-            </p>
-          </div>
-          <div className="d-flex flex-row justify-content-between align-items-center ">
-            <div className="d-flex flex-row  align-items-center ">
-              <img
-                src="../../assets/groups/grp4.svg"
-                style={{
-                  width: "36px",
-                  height: "36px",
-                }}
-              />
-              <p
-                style={{
-                  fontFamily: "IBM Plex Sans",
-                  fontSize: "14px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  color: "black",
-                  marginTop: 15,
-                  paddingLeft: 5,
-                }}
-              >
-                Philosophy
-              </p>
-            </div>
-            <p
-              style={{
-                width: "100",
-                marginTop: 15,
-                color: "#525252",
-                fontFamily: "IBM Plex Sans",
-                fontSize: "14px",
-                fontStyle: "normal",
-                fontWeight: 500,
-                backgroundColor: "lightgray",
-                paddingLeft: 5,
-                paddingRight: 5,
-                borderRadius: 5,
-              }}
-            >
-              Follow{" "}
-            </p>
-          </div>
-        </div>
-      </Container>
-      <Container>
-        <CardBox2 />
-        <CardBox3 />
-        <CardBox4 />
+        <CardBox />
       </Container>
     </div>
   );
 };
 
-export default Dashboard;
+export default DashboardBox;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Alert, Container } from "react-bootstrap";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { MdGroupAdd } from "react-icons/md";
 import CardBox from "../card/Card";
@@ -10,7 +10,7 @@ import Modal from "react-bootstrap/Modal";
 import classes from "./dashboard.module.css"
 import { useSelector } from "react-redux";
 import { FaHeart } from "react-icons/fa";
-import FlashMessage from 'react-flash-message';
+
 const DashboardBox = () => {
   const [show, setShow] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -40,11 +40,11 @@ const DashboardBox = () => {
      
      <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
-          {loggedIn ?<Modal.Title >✍️Create Post with ❤️</Modal.Title>:<FlashMessage duration={500000}>
-            <div className="alert alert-danger" role="alert" style={{textAlign:"center"}}>
+          {loggedIn ?<Modal.Title >✍️Create Post with ❤️</Modal.Title>:<Alert duration={5000}>
+            <Modal.Title className="alert alert-danger p-0" role="alert" style={{textAlign:"center"}}>
               You need to login first
-            </div>
-          </FlashMessage>}
+              </Modal.Title> 
+          </Alert>}
         </Modal.Header>
         <Modal.Body>
           <Form>

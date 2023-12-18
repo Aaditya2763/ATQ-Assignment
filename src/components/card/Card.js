@@ -9,11 +9,12 @@ import React,{Fragment,useState} from 'react'
 import { IoEyeOutline } from "react-icons/io5";
 import Form from 'react-bootstrap/Form';
 
-import FlashMessage from 'react-flash-message';
+
 import { Link } from 'react-router-dom';
 import { FaHeart } from "react-icons/fa";
 import classes from './Card.module.css';
 import { useSelector } from 'react-redux';
+import { Alert } from 'react-bootstrap';
 const CardBox = ({headingStyle,descStyle}) => {
      const [show, setShow] = useState(false);
     const [remove, setRemove] = useState(false);
@@ -43,11 +44,11 @@ const CardBox = ({headingStyle,descStyle}) => {
         {/* edit modal */}
         <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
-       {loggedIn ? <Modal.Title >✍️Create Post with ❤️</Modal.Title>: <FlashMessage duration={500000}>
+       {loggedIn ? <Modal.Title >✍️Create Post with ❤️</Modal.Title>: <Alert duration={500000}>
             <div className="alert alert-danger" role="alert" style={{textAlign:"center"}}>
               You need to login first
             </div>
-          </FlashMessage>}
+          </Alert>}
         </Modal.Header>
         <Modal.Body>
           <Form>
